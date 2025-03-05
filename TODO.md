@@ -9,11 +9,15 @@
 
 
 # Features
-
+- Add a search bar
+- Add a search page
+- Add a search result page
+- ADD Bootstrap
+- Add include templates
 - Edit database entry
 - Add bootstrap
 - add covers
-- add tags
+- add tags taggit
 - add categories
 - add authors
 - add comments
@@ -36,16 +40,51 @@
 - add tasks
 - add notes
 - title suggestion
-
 - AI summarize
-
 - semantic search
-
 - AI Chat with documents
-
 - Store documents in database
-
 - Store documents in cloud
+- add rest api
+- add graphql
+- add websockets
+- add push notifications
+- add email notifications
+- add sms notifications
+- add users
+- add groups/roles
+- add logging
+- add ci/cd
+- add tests
+- add feedback
+- add help
+- add fixtures
+- add landing page
+- add datatables
+- add font awesome
+- add jquery
+- add select2/selectize
+- Use Docker
+- 
 
 
+# Ideas
 
+## Accounts
+
+- Login
+- Register
+- Forgot Password
+- Reset Password
+- Change Password
+- Change Email
+- Change Username
+- Change Profile
+- Change Avatar
+- Change Theme
+
+## Documents
+
+- Upload
+- Download
+- 
