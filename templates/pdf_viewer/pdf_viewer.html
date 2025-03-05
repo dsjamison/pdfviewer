@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PDF Viewer</title>
+
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>{{ pdf.title }}</h2>
+
+    <button id="prev">Previous</button>
+    <button id="next">Next</button>
+
+    <p>
+        Page: <span id="page-num"></span> / <span id="page-count"></span>
+        <br>
+        <hr>
+        <a href="{% url 'pdf_list' %}">View Uploaded PDFs</a>
+    </p>
+
+    <canvas id="pdf-canvas"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var pdfUrl = "{{ pdf.pdf_file.url }}";  // Django file URL
+            var pdfDoc = null, pageNum = 1, scale = 1.5;
+            var canvas = document.getElementById("pdf-canvas");
+            var ctx = canvas.getContext("2d");
+
+            function renderPage(num) {
+                pdfDoc.getPage(num).then(function (page) {
+                    var viewport = page.getViewport({ scale: scale });
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    var renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+                    page.render(renderContext);
+                    $("#page-num").text(num);
+                });
+            }
+
+            pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
+                pdfDoc = pdf;
+                $("#page-count").text(pdf.numPages);
+                renderPage(pageNum);
+            });
+
+            $("#prev").click(function () {
+                if (pageNum > 1) {
+                    pageNum--;
+                    renderPage(pageNum);
+                }
+            });
+
+            $("#next").click(function () {
+                if (pageNum < pdfDoc.numPages) {
+                    pageNum++;
+                    renderPage(pageNum);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

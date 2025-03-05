@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF List</title>
+</head>
+
+<body>
+    <h2>Uploaded PDFs</h2>
+
+    <!-- Search Form -->
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search PDFs..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Tag Filter -->
+    <h3>Filter by Tag:</h3>
+    <ul>
+        {% for tag in tags %}
+        <li><a href="?tag={{ tag }}">{{ tag }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <ul>
+        {% for pdf in pdfs %}
+        <li>
+            <a href="{% url 'pdf_view' pdf.id %}">{{ pdf.title }}</a>
+            <form action="{% url 'delete_pdf' pdf.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </li>
+        {% empty %}
+        <li>No PDFs found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Pagination Controls -->
+    <div>
+        {% if pdfs.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ pdfs.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        Page {{ pdfs.number }} of {{ pdfs.paginator.num_pages }}
+
+        {% if pdfs.has_next %}
+        <a href="?page={{ pdfs.next_page_number }}">Next</a>
+        <a href="?page={{ pdfs.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+    <hr>
+    <div>
+        <a href="{% url 'upload_pdf' %}">Upload Another PDF</a>
+    </div>
+</body>
+
+</html>
