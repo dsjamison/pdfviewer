@@ -73,28 +73,27 @@ INSTALLED_APPS = [
     # "django.contrib.humanize",
     # "django.contrib.postgres",
     # "django_extensions",
-    # "debug_toolbar",
-    # "rest_framework",
-    # "corsheaders",
+    "debug_toolbar",
     # Third-party
-    # "crispy_forms",
-    # "crispy_bootstrap5",
-    # "corsheaders",
-    # "rest_framework",
-    # "rest_framework_api_key",
-    # "drf_spectacular",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "corsheaders",  # django-cors-headers
+    "rest_framework",
+    "rest_framework_api_key",
+    "drf_spectacular",
     # "storages",  # django_storages
-    # "widget_tweaks",
-    # "django_extensions",
-    # "taggit",  # django-taggit
-    # 'django_filters',
-    # 'waffle',  # django-waffle
+    "widget_tweaks",  # django-widget-tweaks
+    "django_extensions",
+    "taggit",  # django-taggit
+    "django_filters",
+    "waffle",  # django-waffle
+    "drf_spectacular_sidecar",  # required for Django collectstatic discovery
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    #  "whitenoise.middleware.WhiteNoiseMiddleware",  # WhiteNoise
-    #  "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # WhiteNoise
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     # "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -103,6 +102,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "waffle.middleware.WaffleMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -221,10 +222,10 @@ FIXTURE_DIRS = [
 ]
 
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
-#AUTH_USER_MODEL = "accounts.User"
+# AUTH_USER_MODEL = "accounts.User"
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-#SITE_ID = 1
+# SITE_ID = 1
 
 # django-debug-toolbar
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
@@ -254,8 +255,8 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
-        'console': {
-            'class': 'logging.StreamHandler',
+        "console": {
+            "class": "logging.StreamHandler",
         },
     },
     "root": {
@@ -275,23 +276,22 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": None,
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.JSONRenderer",
+        "rest_framework.renderers.BrowsableAPIRenderer",
     ),
-    'DATE_FORMAT': '%m/%d/%Y',
-    'DATETIME_FORMAT': '%m/%d/%Y %H:%M:%S',
+    "DATE_FORMAT": "%m/%d/%Y",
+    "DATETIME_FORMAT": "%m/%d/%Y %H:%M:%S",
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-    ),
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser',
+    "DEFAULT_PERMISSION_CLASSES": (),
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
     ],
 }
 
@@ -300,6 +300,9 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "PDF Viewer",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": True,
+    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
 }
 
 # https://whitenoise.readthedocs.io/en/latest/django.html
@@ -324,18 +327,14 @@ AWS_S3_LINK_EXPIRATION = 60 * 60 * 12  # Link expires in 12 hours
 
 # taggit options
 TAGGIT_CASE_INSENSITIVE = True
-KEYWORDS_KEY = 'KeyWords'
-ENHANCED_KEYWORDS_KEY = 'EnhancedKeywords'
-ACRONYMS_KEY = 'Acronyms'
-TAG_DELIMITER = ':'
-METADATA_KEYS = ['enhanced_keywords', 'acronyms', 'keywords']
+TAGGIT_STRIP_UNICODE_WHEN_SLUGIFYING = False
 
 # SQS Queue
 SQS_QUEUE_NAME = ""
 SQS_QUEUE_URL = ""
 SQS_QUEUE_REGION = ""
 
-API_KEY = os.environ.get('API_KEY', 'NONE')
+API_KEY = os.environ.get("API_KEY", "NONE")
 
 # CACHES = {
 #     "default": {
