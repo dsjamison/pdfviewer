@@ -65,7 +65,7 @@
 - add jquery
 - add select2/selectize
 - Use Docker
-- 
+- use jstree
 
 
 # Ideas
