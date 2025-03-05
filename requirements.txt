@@ -1,45 +1,31 @@
 Django==5.1.6
-#   asgiref==3.8.1
-#   sqlparse==0.5.3
-#   tzdata==2025.1
 black==25.1.0
-#   click==8.1.8
-#       colorama==0.4.6
-#   mypy-extensions==1.0.0
-#   packaging==24.2
-#   pathspec==0.12.1
-#   platformdirs==4.3.6
-pipdeptree==2.25.0
-#   packaging==24.2
-
+django-cors-headers==4.7.0
+django-crispy-forms==2.3
+django-debug-toolbar==5.0.1
+django-extensions==3.2.3
+django-filter==25.1
+django-storages==1.14.5
+django-taggit==6.1.0
+django-waffle==4.2.0
+django-widget-tweaks==1.5.0
+djangorestframework-api-key==3.0.0
 dotenv~=0.9.9
-python-dotenv~=1.0.1
+drf-spectacular==0.28.0
+gunicorn==23.0.0
+pillow==11.1.0
+pipdeptree==2.25.0
+psycopg==3.2.5
+PyMuPDF==1.25.3
+pytest-cov==6.0.0
+pytest-django==4.10.0
+requests==2.32.3
+ruff==0.9.9
+whitenoise==6.9.0
 
-
-#boto3==1.35.47 # botocore, jmespath, s3transfer
-#celery==5.4.0  # billiard, click, click-didyoumean, click-plugins, click-repl, kombu, python-dateutil, tzdata, vine
-#crispy-bootstrap5==2024.10 # django, django-crispy-forms
+#boto3==1.35.47
+#celery==5.4.0
 #distro==1.9.0
-#django-cors-headers==4.4.0 # asgiref, django
-#django-extensions==3.2.3 # django
-#django-filter==24.3  # django
-#django-redis==5.4.0 # Django, redis
-#django-storages==1.14.4 # django
-#django-taggit==6.0.0 # django
-#django-waffle==4.2.0 # django
-#django-widget-tweaks==1.5.0
-#djangorestframework==3.15.2 # drf-spectacular
-#djangorestframework-api-key==2.3.0
-#drf-spectacular==0.27.2 # django, djangorestframework, inflection, jsonschema, PyYAML, uritemplate
 #filetype==1.2.0
-#gunicorn==23.0.0 # packaging
 #hiredis==3.1.0
 #humanize==4.11.0
-#pillow==11.0.0
-#psycopg==3.2.3 # typing-extensions, tzdata
-#psycopg2==2.9.10
-#PyMuPDF==1.24.12
-#pytest-cov==6.0.0 # coverage, pytest
-#pytest-django==4.9.0 # pytest
-#requests==2.32.3 # certifi, charset-normalizer, idna, urllib3
-#whitenoise==6.7.0
