@@ -23,7 +23,7 @@ def upload_pdf(request):
 def pdf_list(request):
     query = request.GET.get("q", "")
     tag_filter = request.GET.get("tag", "")
-    pdfs = UploadedPDF.objects.all().order_by("-uploaded_at")
+    pdfs = UploadedPDF.objects.all().order_by("title") #("-uploaded_at")
 
     if query:
         pdfs = UploadedPDF.objects.filter(Q(title__icontains=query) | Q(tags__icontains=query))
