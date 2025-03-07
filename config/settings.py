@@ -350,3 +350,4 @@ API_KEY = os.environ.get("API_KEY", "NONE")
 # CELERY_ACCEPT_CONTENT = ["json"]
 # CELERY_TASK_SERIALIZER = "json"
 
+CI1Vbadm8e9F3PQxTz2XxFCX2ahBsE8x = os.getenv("CI1Vbadm8e9F3PQxTz2XxFCX2ahBsE8x")
